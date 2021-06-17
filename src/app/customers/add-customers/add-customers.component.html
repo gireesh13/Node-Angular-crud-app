@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+
+    <div *ngIf="showMessage" class="alert alert-success" role="alert">
+        Customer has been added succesfully
+    </div>
+    <div class="col-md-4 register-employee">
+      <!-- form card register -->
+      <div class="card-body">
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+          <div class="form-grouop">
+            <!-- Select File -->
+            <input type="file"   (change)="uploadFile($event)" />
+
+            <!-- Image Preview -->
+            <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+              <img [src]="imageURL" [alt]="customerForm.value.name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input class="form-control" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && formData.name.errors }">
+            <!-- error -->
+            <div *ngIf="submitted && formData.name.errors" class="invalid-feedback" style="color: red;">Name is required</div>
+            <!-- <div *ngIf="submitted && formData.name.touched && formData.name.invalid" class="alert alert-danger">
+              <div *ngIf="submitted && formData.name.errors" class="invalid-feedback" style="color: red;">Name is required</div>
+            </div> -->
+          </div>
+  
+          <div class="form-group">
+            <label for="inputEmail3">Email</label>
+            <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && formData.email.errors }">
+            <!-- error -->
+           
+                <div *ngIf="submitted && formData.email.errors && formData.email.errors.required && !formData.email.errors.email" style="color: red;">Email is required.</div>
+                
+                  <div *ngIf="submitted && formData.email.errors && formData.email.errors.email && !formData.email.errors.required" style="color: red;">Please, enter valid email address.</div>
+                
+                <!-- <div *ngIf="submitted && formData.email.e.requiredrrors" style="color: red;">Please, enter valid email address.</div> -->
+          
+          </div>
+          <div class="form-group">
+            <label for="inputVerify3">Mobile No</label>
+            <input class="form-control" type="text" formControlName="mobile_number" [ngClass]="{ 'is-invalid': submitted && formData.mobile_number.errors }" >
+            <!-- error -->
+            
+            <div *ngIf="submitted && formData.mobile_number.errors" class="invalid-feedback" style="color: red;">Mobile number is required</div>
+            
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3">Designation</label>
+            <select class="custom-select form-control"  formControlName="designation" [ngClass]="{ 'is-invalid': submitted && formData.designation.errors }" >
+              
+              <option value="">Please select designation</option>
+              <option *ngFor="let customerProfile of CustomerProfile" value="{{customerProfile}}">{{customerProfile}}
+              </option>
+            </select>
+            <!-- error -->
+            <div *ngIf="submitted && formData.designation.errors" style="color: red;">Choose designation.</div>
+            <!-- <div class="invalid-feedback" *ngIf="formData.designation.errors?.required">
+              Choose designation.
+            </div> -->
+          </div>
+          <div class="form-group form-check" style="margin-top: 14px;">
+            <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && formData.acceptTerms.errors }"/>
+            <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+            <!-- <div *ngIf="formData.acceptTerms.touched && formData.acceptTerms.invalid" class="alert alert-danger">
+              <div *ngIf="formData.acceptTerms.errors.required">Accept Ts & Cs is required</div>
+          </div> -->
+            <div *ngIf="submitted && formData.acceptTerms.errors" class="invalid-feedback" style="color: red;">Accept Ts & Cs is required</div>
+        </div>
+        <div class="form-group" style="margin-top: 14px;">
+          <div>
+            <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+            <label for="male">Male</label>
+         </div>
+      
+         <div>
+            <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+            <label for="female">Female</label>
+         </div>
+        </div>
+        <div class="form-grouop">
+          <label for="description">Description</label>
+          <ckeditor
+          [ngClass]="{ 'is-invalid': submitted && formData.description.errors }"
+            #editor
+            id="description"
+            formControlName="description"
+           >
+          </ckeditor>
+          <div *ngIf="submitted && formData.description.errors" class="invalid-feedback" style="color: red;">description is required</div>
+        </div>
+       
+  
+          <div class="form-group" style="margin-top: 14px;">
+            <button class="btn btn-success btn-lg btn-block" type="submit">Register</button>
+          </div>
+        </form>
+  
+      </div>
+    </div><!-- form card register -->
+  </div>

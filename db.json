@@ -1,0 +1,3 @@
+{
+    "products":[{"id":1,"title":"led","price":400},{"id":2,"title":"machine","price":4000},{"id":3,"title":"bike","price":40000}]
+}

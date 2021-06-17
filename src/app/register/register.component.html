@@ -1,0 +1,46 @@
+
+<div class="auth-wrapper">
+    <form class="form-signin" [formGroup]="signupForm" (ngSubmit)="registerUser()">
+        <h3 class="h3 mb-3 font-weight-normal text-center">Please sign up</h3>
+       
+          
+          <div class="form-group">
+            <label>Profile Image</label>
+            <input type="file" class="form-control" formControlName="file"(change)="onImageChange($event)">
+            <div *ngIf="formData.file.touched && formData.file.invalid" class="alert alert-danger">
+                <div *ngIf="formData.file.errors.required">Image file is required.</div>
+            </div>
+        </div>
+      
+        <div class="form-group">
+            <label>Firstname</label>
+            <input type="text" class="form-control" formControlName="fname" placeholder="Enter first name">
+            <div *ngIf="formData.fname.touched && formData.fname.invalid" class="alert alert-danger">
+                <div *ngIf="formData.fname.errors.required">firstname is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Lastname</label>
+            <input type="text" class="form-control" formControlName="lname" placeholder="Enter last name">
+            <div *ngIf="formData.lname.touched && formData.lname.invalid" class="alert alert-danger">
+                <div *ngIf="formData.lname.errors.required">lastname is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter email" >
+            <div *ngIf="formData.email.touched && formData.email.invalid" class="alert alert-danger">
+                <div *ngIf="formData.email.errors.required">Email is required.</div>
+                <div *ngIf="formData.email.errors.email">Please, enter valid email address.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Password">
+            <div *ngIf="formData.password.touched && formData.password.invalid" class="alert alert-danger">
+                <div *ngIf="formData.password.errors.required">password is required.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">Sign up</button>
+    </form>
+</div>

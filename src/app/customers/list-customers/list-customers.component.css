@@ -1,0 +1,30 @@
+table {
+    width:100%;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+  #t01 tr:nth-child(even) {
+    background-color: #eee;
+  }
+  #t01 tr:nth-child(odd) {
+   background-color: #fff;
+  }
+  .add-btn{
+    float: right;
+    margin-bottom: 13px;
+  }
+  .table-data-margin{
+    margin-top: 50px;
+  }
+  .view-btn{
+    background-color: yellow;
+  }
+  .image-title{
+    width:80px
+  }

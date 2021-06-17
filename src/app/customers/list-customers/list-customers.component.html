@@ -1,0 +1,79 @@
+
+  <div class="container table-data-margin">
+    <div *ngIf="showDeleteMsg" class="alert alert-success" role="alert">
+      Customer has been deleted succesfully
+  </div>
+  <div *ngIf="showUpdateMsg" class="alert alert-success" role="alert">
+    Customer status has been updated succesfully
+</div>
+
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <div class="row col-sm-4">
+      <label for="inputName">Name</label>
+      <input class="form-control" type="text" formControlName="name">
+    </div>
+    <div class="form-group" style="margin-top: 14px;">
+      <button class="btn btn-success btn-lg btn-block" type="submit">Search</button>
+    </div>
+  </form>
+    <button class="btn btn-primary add-btn" [routerLink]="['add']">Add Customer</button>
+    
+    <!-- No data message -->
+    <!-- <p *ngIf="Employee.length <= 0" class="no-data text-center">There is no employee added yet!</p> -->
+  
+    <!-- Employee list -->
+
+    
+    <table class="table table-bordered">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">Customer ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Mobile Number</th>
+          <th scope="col">designation</th>
+          <th scope="col">Status</th>
+          <th scope="col center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customerList | paginate : {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        };
+  ">
+          <td><img [src]="imageUrl+customer.profile_image" class="image-title"/></td>
+          <td>{{customer.name}}</td>
+          <td>{{customer.email}}</td>
+          <td>{{customer.mobile_number}}</td>
+          <td>{{customer.designation}}</td>
+          <td *ngIf="customer.status else elseBlock"><span style="color: green; font-style: italic;">Active</span></td>
+         <ng-template #elseBlock ><span style="color: red; font-style: italic;">Deactive</span></ng-template>
+          <td class="text-center edit-block">
+            <span class="edit" [routerLink]="['edit', customer._id]">
+              <button type="button" class="btn btn-success btn-sm">Edit</button>
+            </span>
+            <span class="delete" (click)="removeCustomer(customer._id)">
+              <button type="button" class="btn btn-danger btn-sm">Delete</button>
+            </span>
+            <span class="view"  [routerLink]="['view', customer._id]">
+              <button type="button" class="btn btn-cyan btn-sm view-btn">View</button>
+            </span>
+            <span class="delete" (click)="updateCustomerStatus(customer._id)">
+              <button type="button" class="btn btn-primary btn-sm">Update Status</button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+      <pagination-controls 
+      
+        previousLabel="Prev" 
+        nextLabel="Next" 
+        (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  </div>

@@ -1,0 +1,28 @@
+
+  <div class="container table-data-margin">
+    <button class="btn btn-primary add-btn" [routerLink]="['customer']">Back</button>
+    <!-- No data message -->
+    <!-- <p *ngIf="Employee.length <= 0" class="no-data text-center">There is no employee added yet!</p> -->
+  
+    <!-- Employee list -->
+    <table class="table table-bordered">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">Profile Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Mobile Number</th>
+          <th scope="col">Designation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img [src]="imageUrl+customerDetail.profile_image" class="image-title"/></td>
+          <td>{{customerDetail.name}}</td>
+          <td>{{customerDetail.email}}</td>
+          <td>{{customerDetail.mobile_number}}</td>
+          <td>{{customerDetail.designation}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
